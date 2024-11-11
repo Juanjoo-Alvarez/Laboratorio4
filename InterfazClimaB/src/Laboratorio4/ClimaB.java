@@ -23,12 +23,28 @@ import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ActionEvent;
 
 public class ClimaB {
 
 	private JFrame frame;
-	private JRadioButton rdbtnFrontal;
-
+	private JLabel lblEncendido;
+	private JButton btnMas;
+	private JButton btnMas_1;
+	private JLabel lblTempNum;
+	private JCheckBox chckbxModoAutomatico;
+	private JSlider sliderVentilaciom;
+	private JComboBox comboBox_1;
+	private JCheckBox chckbxModoEco;
+	private JSlider sliderAsientosDelanteros;
+	private JSlider sliderAsientosTraseros;
+	private JLabel lblMantenimiento;
+	private JButton btnHistorial;
+	private JButton btnAgendarMantenimiento;
+	private JCheckBox chckbxDesempa;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -74,14 +90,14 @@ public class ClimaB {
 		frame.getContentPane().add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		Border bordeConEspacio = BorderFactory.createEmptyBorder(10, 10, 10, 10); // 10px de espacio alrededor
         Border bordeLinea = BorderFactory.createLineBorder(Color.BLACK, 2); // Borde negro de 2px
         
-        JLabel lblEncendido = new JLabel("Encendido");
+        lblEncendido = new JLabel("Apagado");
         lblEncendido.setFont(new Font("Palatino Linotype", Font.BOLD, 25));
         GridBagConstraints gbc_lblEncendido = new GridBagConstraints();
         gbc_lblEncendido.anchor = GridBagConstraints.SOUTH;
@@ -92,6 +108,40 @@ public class ClimaB {
         panel.add(lblEncendido, gbc_lblEncendido);
         
         JButton btnEncender = new JButton("O");
+        btnEncender.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		if (lblEncendido.getText().equals("Apagado")) {
+        			lblEncendido.setText("Encendido");
+        			btnMas.setEnabled(true);
+        			lblTempNum.setText(" 25 °C ");
+        			btnMas_1.setEnabled(true);
+        			chckbxModoAutomatico.setEnabled(true);
+        			sliderVentilaciom.setEnabled(true);
+        			comboBox_1.setEnabled(true);
+        			chckbxModoEco.setEnabled(true);
+        			sliderAsientosDelanteros.setEnabled(true);
+        			sliderAsientosTraseros.setEnabled(true);
+        			btnHistorial.setEnabled(true);
+        			btnAgendarMantenimiento.setEnabled(true);
+        			chckbxDesempa.setEnabled(true);
+        		}
+        		else {
+        			lblEncendido.setText("Apagado");
+        			btnMas.setEnabled(false);
+        			lblTempNum.setText("     ");
+        			btnMas_1.setEnabled(false);
+        			chckbxModoAutomatico.setEnabled(false);
+        			sliderVentilaciom.setEnabled(false);
+        			comboBox_1.setEnabled(false);
+        			chckbxModoEco.setEnabled(false);
+        			sliderAsientosDelanteros.setEnabled(false);
+        			sliderAsientosTraseros.setEnabled(false);
+        			btnHistorial.setEnabled(false);
+        			btnAgendarMantenimiento.setEnabled(false);
+        			chckbxDesempa.setEnabled(false);
+        		} 
+        	}
+        });
         btnEncender.setFont(new Font("Tahoma", Font.PLAIN, 20));
         GridBagConstraints gbc_btnEncender = new GridBagConstraints();
         gbc_btnEncender.gridheight = 3;
@@ -108,15 +158,16 @@ public class ClimaB {
 		gbc_lblTemperatura.gridy = 3;
 		panel.add(lblTemperatura, gbc_lblTemperatura);
 		
-		JButton btnMas = new JButton("+");
+		btnMas = new JButton("+");
 		btnMas.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_btnMas = new GridBagConstraints();
 		gbc_btnMas.insets = new Insets(0, 0, 5, 5);
 		gbc_btnMas.gridx = 3;
 		gbc_btnMas.gridy = 3;
 		panel.add(btnMas, gbc_btnMas);
+		btnMas.setEnabled(false);
 		
-		JLabel lblTempNum = new JLabel("   24.2 ° C    ");
+		lblTempNum = new JLabel("        ");
 		lblTempNum.setFont(new Font("Palatino Linotype", Font.PLAIN, 20));
 		lblTempNum.setBorder(BorderFactory.createCompoundBorder(bordeConEspacio, bordeLinea)); // Combina ambos bordes
 		GridBagConstraints gbc_lblTempNum = new GridBagConstraints();
@@ -126,15 +177,17 @@ public class ClimaB {
 		gbc_lblTempNum.gridy = 3;
 		panel.add(lblTempNum, gbc_lblTempNum);
 		
-		JButton btnMas_1 = new JButton("—");
+		btnMas_1 = new JButton("—");
 		btnMas_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		GridBagConstraints gbc_btnMas_1 = new GridBagConstraints();
 		gbc_btnMas_1.insets = new Insets(0, 0, 5, 5);
 		gbc_btnMas_1.gridx = 5;
 		gbc_btnMas_1.gridy = 3;
 		panel.add(btnMas_1, gbc_btnMas_1);
+		btnMas_1.setEnabled(false);
 		
-		JCheckBox chckbxModoAutomatico = new JCheckBox("Modo Automático");
+		chckbxModoAutomatico = new JCheckBox("Modo Automático");
+		chckbxModoAutomatico.setSelected(true);
 		chckbxModoAutomatico.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
 		GridBagConstraints gbc_chckbxModoAutomatico = new GridBagConstraints();
 		gbc_chckbxModoAutomatico.anchor = GridBagConstraints.SOUTH;
@@ -143,6 +196,7 @@ public class ClimaB {
 		gbc_chckbxModoAutomatico.gridx = 3;
 		gbc_chckbxModoAutomatico.gridy = 4;
 		panel.add(chckbxModoAutomatico, gbc_chckbxModoAutomatico);
+		chckbxModoAutomatico.setEnabled(false);
 		
 		JLabel lblVentilacion = new JLabel("Ventilación:");
 		lblVentilacion.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
@@ -170,7 +224,7 @@ public class ClimaB {
 		gbc_lblDireccin.gridy = 6;
 		panel.add(lblDireccin, gbc_lblDireccin);
 		
-		JSlider sliderVentilaciom = new JSlider();
+		sliderVentilaciom = new JSlider();
 		sliderVentilaciom.setSnapToTicks(true);
 		sliderVentilaciom.setMinorTickSpacing(1);
 		sliderVentilaciom.setMajorTickSpacing(1);
@@ -184,28 +238,22 @@ public class ClimaB {
 		gbc_sliderVentilaciom.gridx = 1;
 		gbc_sliderVentilaciom.gridy = 7;
 		panel.add(sliderVentilaciom, gbc_sliderVentilaciom);
+		sliderVentilaciom.setEnabled(false);
 		
-		JRadioButton rdbtnParabrisas = new JRadioButton("Parabrisas");
-		rdbtnParabrisas.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
-		GridBagConstraints gbc_rdbtnParabrisas = new GridBagConstraints();
-		gbc_rdbtnParabrisas.anchor = GridBagConstraints.WEST;
-		gbc_rdbtnParabrisas.gridwidth = 3;
-		gbc_rdbtnParabrisas.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnParabrisas.gridx = 4;
-		gbc_rdbtnParabrisas.gridy = 7;
-		panel.add(rdbtnParabrisas, gbc_rdbtnParabrisas);
+		comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Todo", "Parabrisas", "Frontal", "Pies"}));
+		comboBox_1.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
+		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+		gbc_comboBox_1.gridheight = 2;
+		gbc_comboBox_1.gridwidth = 2;
+		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_1.gridx = 4;
+		gbc_comboBox_1.gridy = 7;
+		panel.add(comboBox_1, gbc_comboBox_1);
+		comboBox_1.setEnabled(false);
 		
-		rdbtnFrontal = new JRadioButton("Frontal");
-		rdbtnFrontal.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
-		GridBagConstraints gbc_rdbtnFrontal = new GridBagConstraints();
-		gbc_rdbtnFrontal.anchor = GridBagConstraints.WEST;
-		gbc_rdbtnFrontal.gridwidth = 3;
-		gbc_rdbtnFrontal.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnFrontal.gridx = 4;
-		gbc_rdbtnFrontal.gridy = 8;
-		panel.add(rdbtnFrontal, gbc_rdbtnFrontal);
-		
-		JCheckBox chckbxModoEco = new JCheckBox("Modo Eco");
+		chckbxModoEco = new JCheckBox("Modo Eco");
 		chckbxModoEco.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
 		GridBagConstraints gbc_chckbxModoEco = new GridBagConstraints();
 		gbc_chckbxModoEco.gridwidth = 2;
@@ -213,26 +261,7 @@ public class ClimaB {
 		gbc_chckbxModoEco.gridx = 1;
 		gbc_chckbxModoEco.gridy = 9;
 		panel.add(chckbxModoEco, gbc_chckbxModoEco);
-		
-		JRadioButton rdbtnPies = new JRadioButton("Pies");
-		rdbtnPies.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
-		GridBagConstraints gbc_rdbtnPies = new GridBagConstraints();
-		gbc_rdbtnPies.anchor = GridBagConstraints.WEST;
-		gbc_rdbtnPies.gridwidth = 2;
-		gbc_rdbtnPies.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnPies.gridx = 4;
-		gbc_rdbtnPies.gridy = 9;
-		panel.add(rdbtnPies, gbc_rdbtnPies);
-		
-		JRadioButton rdbtnTodos = new JRadioButton("Todos");
-		rdbtnTodos.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
-		GridBagConstraints gbc_rdbtnTodos = new GridBagConstraints();
-		gbc_rdbtnTodos.anchor = GridBagConstraints.SOUTHWEST;
-		gbc_rdbtnTodos.gridwidth = 2;
-		gbc_rdbtnTodos.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnTodos.gridx = 4;
-		gbc_rdbtnTodos.gridy = 10;
-		panel.add(rdbtnTodos, gbc_rdbtnTodos);
+		chckbxModoEco.setEnabled(false);
 		
 		JLabel lblCalefaccin = new JLabel("Calefacción: ");
 		lblCalefaccin.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
@@ -261,7 +290,7 @@ public class ClimaB {
 		gbc_lblAsientosTraseros.gridy = 12;
 		panel.add(lblAsientosTraseros, gbc_lblAsientosTraseros);
 		
-		JSlider sliderAsientosDelanteros = new JSlider();
+		sliderAsientosDelanteros = new JSlider();
 		sliderAsientosDelanteros.setSnapToTicks(true);
 		sliderAsientosDelanteros.setPaintTicks(true);
 		sliderAsientosDelanteros.setPaintLabels(true);
@@ -274,8 +303,9 @@ public class ClimaB {
 		gbc_sliderAsientosDelanteros.gridx = 1;
 		gbc_sliderAsientosDelanteros.gridy = 13;
 		panel.add(sliderAsientosDelanteros, gbc_sliderAsientosDelanteros);
+		sliderAsientosDelanteros.setEnabled(false);
 		
-		JSlider sliderAsientosTraseros = new JSlider();
+		sliderAsientosTraseros = new JSlider();
 		sliderAsientosTraseros.setSnapToTicks(true);
 		sliderAsientosTraseros.setPaintTicks(true);
 		sliderAsientosTraseros.setPaintLabels(true);
@@ -288,25 +318,61 @@ public class ClimaB {
 		gbc_sliderAsientosTraseros.gridx = 4;
 		gbc_sliderAsientosTraseros.gridy = 13;
 		panel.add(sliderAsientosTraseros, gbc_sliderAsientosTraseros);
+		sliderAsientosTraseros.setEnabled(false);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Mantenimiento", "Ver Historial ", "Agendar Mantenimiento"}));
-		comboBox.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.gridwidth = 3;
-		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 15;
-		panel.add(comboBox, gbc_comboBox);
+		lblMantenimiento = new JLabel("Mantenimiento: ");
+		lblMantenimiento.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
+		GridBagConstraints gbc_lblMantenimiento = new GridBagConstraints();
+		gbc_lblMantenimiento.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMantenimiento.gridx = 2;
+		gbc_lblMantenimiento.gridy = 14;
+		panel.add(lblMantenimiento, gbc_lblMantenimiento);
 		
-		JCheckBox chckbxDesempa = new JCheckBox("Desempañador");
+		btnHistorial = new JButton("Ver Historial");
+		btnHistorial.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnHistorial = new GridBagConstraints();
+		gbc_btnHistorial.insets = new Insets(0, 0, 5, 5);
+		gbc_btnHistorial.gridx = 2;
+		gbc_btnHistorial.gridy = 15;
+		panel.add(btnHistorial, gbc_btnHistorial);
+		btnHistorial.setEnabled(false);
+		
+		btnAgendarMantenimiento = new JButton("Agendar Mantenimiento");
+		btnAgendarMantenimiento.setFont(new Font("Palatino Linotype", Font.PLAIN, 15));
+		GridBagConstraints gbc_btnAgendarMantenimiento = new GridBagConstraints();
+		gbc_btnAgendarMantenimiento.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAgendarMantenimiento.gridx = 2;
+		gbc_btnAgendarMantenimiento.gridy = 16;
+		panel.add(btnAgendarMantenimiento, gbc_btnAgendarMantenimiento);
+		btnAgendarMantenimiento.setEnabled(false);
+		
+		chckbxDesempa = new JCheckBox("Desempañador");
 		chckbxDesempa.setFont(new Font("Palatino Linotype", Font.BOLD, 20));
 		GridBagConstraints gbc_chckbxDesempa = new GridBagConstraints();
 		gbc_chckbxDesempa.gridwidth = 2;
 		gbc_chckbxDesempa.insets = new Insets(0, 0, 0, 5);
 		gbc_chckbxDesempa.gridx = 4;
-		gbc_chckbxDesempa.gridy = 15;
+		gbc_chckbxDesempa.gridy = 16;
 		panel.add(chckbxDesempa, gbc_chckbxDesempa);
+		chckbxDesempa.setEnabled(false);
 	}
+	
+	public void itemStateChanged(ItemEvent e) {
+		if (chckbxModoAutomatico.isSelected()) {
+			this.lblTempNum.setText(" 25 °C ");
+			this.btnMas.setEnabled(false);
+			this.btnMas_1.setEnabled(false);}
+		if (!chckbxModoAutomatico.isSelected()){
+			this.lblTempNum.setText(" 25 °C ");
+			this.btnMas.setEnabled(true);
+			this.btnMas_1.setEnabled(true); }
+		if (chckbxModoEco.isSelected()) {
+			this.LabelExtra1.setVisible(false);
+			this.TxtExtra1.setVisible(false); 
+			this.DropDimExtra1.setVisible(false); }
+		if (!chckbxModoEco.isSelected()){
+			sliderVentilaciom.setValue(1);
+			sliderVentilaciom.setEnabled(false);}
+		}
 
 }
