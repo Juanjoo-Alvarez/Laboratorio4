@@ -366,13 +366,6 @@ public class ClimaB {
 			this.lblTempNum.setText(" 25 °C ");
 			this.btnMas.setEnabled(true);
 			this.btnMas_1.setEnabled(true); }
-		if (chckbxModoEco.isSelected()) {
-			this.LabelExtra1.setVisible(false);
-			this.TxtExtra1.setVisible(false); 
-			this.DropDimExtra1.setVisible(false); }
-		if (!chckbxModoEco.isSelected()){
-			sliderVentilaciom.setValue(1);
-			sliderVentilaciom.setEnabled(false);}
 		}
 
 }
